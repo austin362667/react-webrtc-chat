@@ -24,7 +24,7 @@ const options = {
 const https = require('https')
 
 const appendPeerDataServer = PeerDataServer.default || PeerDataServer;
-const server = https.createServer(app);
+const server = https.createServer(options, app);
 
 appendPeerDataServer(server);
 
