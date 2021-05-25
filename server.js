@@ -4,7 +4,7 @@ const http = require("http");
 const PeerDataServer = require("peer-data-server");
 const fs = require("fs");
 
-const PORT = parseInt(process.env.PORT, 10) || (process.env.NODE_ENV === "production" ? 8080 : 3001);
+const PORT = parseInt(process.env.PORT, 10) || (process.env.NODE_ENV === "production" ? 443 : 3001);
 
 const app = express();
 
