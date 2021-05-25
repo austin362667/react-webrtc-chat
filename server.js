@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const http = require("http");
 const PeerDataServer = require("peer-data-server");
+const fs = require("fs");
 
 const PORT = parseInt(process.env.PORT, 10) || (process.env.NODE_ENV === "production" ? 8080 : 3001);
 
@@ -14,8 +15,16 @@ if (process.env.NODE_ENV === "production") {
   );
 }
 
+const options = {
+  key: fs.readFileSync('/etc/letsencrypt/live/lattemall.company/privkey.pem'),
+  ca: [fs.readFileSync('/etc/letsencrypt/live/lattemall.company/fullchain.pem')],
+  cert: fs.readFileSync('/etc/letsencrypt/live/lattemall.company/fullchain.pem')
+};
+
+const https = require('https')
+
 const appendPeerDataServer = PeerDataServer.default || PeerDataServer;
-const server = http.createServer(app);
+const server = https.createServer(app);
 
 appendPeerDataServer(server);
 
